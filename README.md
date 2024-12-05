@@ -1,4 +1,4 @@
-# Church Website
+# Grace Fellowship Website - Production ready
 
 A modern church website built with Astro, featuring ministry pages, sermons, and a blog.
 
