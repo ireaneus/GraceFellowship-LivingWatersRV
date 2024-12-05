@@ -1,0 +1,30 @@
+---
+const articles = [
+  {
+    title: "Personal Statement of Faith",
+    date: "11-01-2024",
+    description: "My personal statement of Faith. Long read."
+  },
+  {
+    title: "I am a Sinner",
+    date: "11-15-2024",
+    description: "Be prepared for a hard examination of yourself"
+  }
+];
+---
+
+<div class="bg-white p-6 rounded-lg shadow-lg">
+  <h2 class="text-2xl font-bold text-gray-900 mb-4">Living waters RV Ministry</h2>
+  <div class="space-y-6">
+    {articles.map((article) => (
+      <div class="border-b border-gray-200 pb-4 last:border-b-0 last:pb-0">
+        <h3 class="text-xl font-semibold text-gray-800">{article.title}</h3>
+        <p class="text-gray-600 mt-1">{article.date}</p>
+        <p class="mt-2 text-gray-700">{article.description}</p>
+      </div>
+    ))}
+  </div>
+  <a href="/blog" class="inline-block mt-6 text-indigo-600 hover:text-indigo-500">
+    View All Articles →
+  </a>
+</div>

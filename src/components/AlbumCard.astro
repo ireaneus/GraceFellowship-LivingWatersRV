@@ -1,0 +1,87 @@
+---
+import type { Album } from '../content/sermons/albums';
+
+interface Props {
+  album: Album;
+  sermonCount: number;
+}
+
+const { album, sermonCount } = Astro.props;
+---
+
+<a href={`/sermons/${album.id}`} class="album-card">
+  <div class="album-image">
+    <img src={album.coverImage} alt={`${album.title} cover`} loading="lazy" />
+  </div>
+  <div class="album-info">
+    <h2>{album.title}</h2>
+    <p class="sermon-count">{sermonCount} {sermonCount === 1 ? 'sermon' : 'sermons'}</p>
+    {album.description && <p class="description">{album.description}</p>}
+  </div>
+</a>
+
+<style>
+  .album-card {
+    background: white;
+    border-radius: 0.5rem;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+    text-decoration: none;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: block;
+    overflow: hidden;
+  }
+
+  .album-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .album-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .album-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .album-card:hover .album-image img {
+    transform: scale(1.05);
+  }
+
+  .album-info {
+    padding: 1.5rem;
+  }
+
+  h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    line-height: 1.4;
+  }
+
+  .sermon-count {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+  }
+
+  .description {
+    margin: 0.5rem 0 0 0;
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 640px) {
+    .album-image {
+      height: 150px;
+    }
+  }
+</style>

@@ -1,0 +1,90 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EventsList from '../components/EventsList.astro';
+import LivingWaters from '../components/LivingWaters.astro';
+---
+
+<BaseLayout title="Grace Fellowship and Living Waters RV website">
+  <div class="bg-white">
+    <div class="relative">
+      <div class="mx-auto max-w-7xl">
+        <div class="relative z-10 pt-14">
+          <div class="relative content">
+            <div class="lg:mx-0">
+                <img src="/images/logo.gif" alt="Grace Fellowship Logo" class="home-image" />
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                  Grace Fellowship Website Resurrected
+                </h2>
+                <p class="mt-2 text-gray-700">Dedicated to the memory of Pastor Jack Hurley</p>
+                <img 
+                  src="/images/Pastor_2.jpg" 
+                  alt="Pastor Jack Hurley"
+                  class="rv-image rounded-sm shadow-sm"
+                />
+
+                <p class="mt-2 text-gray-700">
+                  It is time to dust off your Bibles, and get back into the Word of God. 
+                  There are several new additions to the books of the Bible, topical, 
+                  and prophecy teachings spanning from 1984 to 2004.
+                </p>
+
+                <h2 class="text-2xl font-bold text-gray-900 mb-4">
+                  Introducing Living Waters RV Ministry
+                </h2>
+                <img 
+                  src="/images/livingwatersrv.jpg" 
+                  alt="Living Waters RV Ministry"
+                  class="rv-image-small rounded-sm shadow-sm"
+                />
+                <p class="mt-2 text-gray-700">
+                  Check in the Living Waters menu option for Devotionals, articles and 
+                  other valuable information about our currently active ministry, 
+                  I hope it is a blessing to read.
+                </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <EventsList />
+        <LivingWaters />
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .home-image {
+    margin-top: -2rem;
+    margin-left: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .rv-image {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .rv-image-small {
+    margin-top: 1rem;
+    margin-left: 1rem;
+    padding-bottom: 1rem;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    .home-image {
+      margin-left: 0;
+    }
+
+    .rv-image,
+    .rv-image-small {
+      margin-left: 0;
+      height: auto;
+    }
+  }
+</style>

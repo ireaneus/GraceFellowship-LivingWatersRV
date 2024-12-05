@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getUniqueAlbums, getSermonsByAlbum, getPdfUrl, getAudioUrl } from '../../../utils/sermonUtils';
+
+export async function getStaticPaths() {
+  const albums = getUniqueAlbums();
+  const paths = [];
+
+  for (const album of albums) {
+    const sermons = getSermonsByAlbum(album);
+    for (const sermon of sermons) {
+      // Ensure we have valid slugs by removing .mp3 and any invalid characters
+      const slug = sermon.name.replace('.mp3', '').replace(/[^a-zA-Z0-9-]/g, '-');
+      paths.push({
+        params: { album, slug },
+        props: { sermon }
+      });
+    }
+  }
+
+  return paths;
+}
+
+const { sermon } = Astro.props;
+const pdfUrl = getPdfUrl(sermon);
+const audioUrl = getAudioUrl(sermon);
+---
+
+<BaseLayout title={sermon.title}>
+  <main>
+    <div class="sermon-detail">
+      <a href={`/sermons/${sermon.album}`} class="back-button">&larr; Back to {sermon.album}</a>
+      <h1>{sermon.title}</h1>
+      <div class="sermon-info">
+        <p class="speaker">{sermon.speaker}</p>
+        <p class="album">Album: {sermon.album}</p>
+        <p class="date">Date: {sermon.date}</p>
+        {sermon.description && <p class="description">{sermon.description}</p>}
+      </div>
+
+      <div class="content-wrapper">
+        <div class="audio-player">
+          <h2>Audio Sermon</h2>
+          <audio controls>
+            <source src={audioUrl} type="audio/mpeg">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+
+        {pdfUrl && (
+          <div class="pdf-section">
+            <h2>Study Materials</h2>
+            <a href={pdfUrl} class="pdf-button" target="_blank" rel="noopener noreferrer">
+              Download PDF
+            </a>
+          </div>
+        )}
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  main {
+    margin: auto;
+    padding: 2rem;
+    max-width: 800px;
+    background-color: white;
+    min-height: 100vh;
+  }
+
+  .sermon-detail {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+  }
+
+  .sermon-image {
+    margin: -2rem -2rem 2rem -2rem;
+    height: 300px;
+    overflow: hidden;
+    border-radius: 8px 8px 0 0;
+  }
+
+  .sermon-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .back-button {
+    display: inline-block;
+    color: #666;
+    text-decoration: none;
+    margin-bottom: 2rem;
+    transition: color 0.2s;
+  }
+
+  .back-button:hover {
+    color: #333;
+  }
+
+  h1 {
+    margin: 0 0 1.5rem 0;
+    font-size: 2rem;
+    color: #1a1a1a;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    color: #1a1a1a;
+    margin-bottom: 1rem;
+  }
+
+  .sermon-info {
+    margin-bottom: 2rem;
+  }
+
+  .sermon-info p {
+    margin: 0.5rem 0;
+  }
+
+  .speaker {
+    font-size: 1.2rem;
+    color: rgb(var(--accent));
+  }
+
+  .album, .date {
+    color: #666;
+  }
+
+  .description {
+    margin-top: 1rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: #444;
+  }
+
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .audio-player {
+    margin-top: 1rem;
+  }
+
+  .pdf-section {
+    margin-top: 1rem;
+  }
+
+  audio {
+    width: 100%;
+  }
+
+  .pdf-button {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: #e53e3e;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+  }
+
+  .pdf-button:hover {
+    background: #c53030;
+  }
+</style>

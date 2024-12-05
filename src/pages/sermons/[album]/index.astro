@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SermonCard from '../../../components/SermonCard.astro';
+import { getUniqueAlbums, getSermonsByAlbum, getAlbumInfo } from '../../../utils/sermonUtils';
+
+export async function getStaticPaths() {
+  const albums = getUniqueAlbums();
+  return albums.map(album => ({
+    params: { album },
+    props: { 
+      sermons: getSermonsByAlbum(album),
+      albumInfo: getAlbumInfo(album)
+    }
+  }));
+}
+
+const { album } = Astro.params;
+const { sermons, albumInfo } = Astro.props;
+---
+
+<BaseLayout title={`${albumInfo?.title || album} Sermons`}>
+  <main>
+    <div class="header">
+      <a href="/sermons" class="back-button">&larr; Back to Albums</a>
+      {albumInfo?.coverImage && (
+        <div class="album-header">
+          <img src={albumInfo.coverImage} alt={`${albumInfo.title} cover`} />
+          <div class="album-info">
+            <h1>{albumInfo.title}</h1>
+            {albumInfo.description && <p class="description">{albumInfo.description}</p>}
+          </div>
+        </div>
+      )}
+      {!albumInfo && <h1>{album} Sermons</h1>}
+    </div>
+
+    <div class="sermon-list">
+      {sermons.map(sermon => (
+        <SermonCard sermon={sermon} />
+      ))}
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  main {
+    margin: auto;
+    padding: 2rem;
+    max-width: 1200px;
+    background-color: white;
+    min-height: 100vh;
+  }
+
+  .header {
+    margin-bottom: 2rem;
+  }
+
+  .back-button {
+    display: inline-block;
+    color: #666;
+    text-decoration: none;
+    margin-bottom: 1rem;
+    transition: color 0.2s;
+  }
+
+  .back-button:hover {
+    color: #333;
+  }
+
+  .album-header {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin: 2rem 0;
+  }
+
+  .album-header img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .album-info {
+    flex: 1;
+  }
+
+  h1 {
+    color: #333;
+    margin: 0 0 1rem 0;
+  }
+
+  .description {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .sermon-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+</style>

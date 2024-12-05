@@ -1,0 +1,154 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Grace Fellowship and Living Waters RV" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <Header />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --primary-color: #3b82f6;
+    --secondary-color: #1e40af;
+    --text-color: #1f2937;
+    --background-color: #ffffff;
+    --header-background: #3e585f;
+    --nav-text-color: #ffffff;
+    --header-text-color: antiquewhite;
+    --dropdown-background: #ffffff;
+    --dropdown-hover: #f3f4f6;
+  }
+  
+  body {
+    font-family: "EB Garamond", serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .footer {
+    background-color: var(--header-background);
+    color: var(--header-text-color);
+    text-align: center;
+  }
+  
+  .nav-container {
+    background-color: var(--header-background);
+  }
+  
+  .nav-header {
+    color: var(--header-text-color);
+    background-color: var(--header-background);
+    letter-spacing: .25em;
+    text-align: center;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+  }
+  
+  .nav-menu {
+    color: var(--header-text-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+  }
+  
+  .content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .markdown-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 1.8;
+  }
+  
+  .markdown-content img {
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 2rem auto;
+  }
+
+  .markdown-content em {
+    color: firebrick;
+  }
+  
+  .markdown-content h1,
+  .markdown-content h2,
+  .markdown-content h3,
+  .markdown-content h4,
+  .markdown-content h5,
+  .markdown-content h6 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+  }
+  
+  .markdown-content p {
+    margin: 1.5rem 0;
+  }
+  
+  .markdown-content a {
+    color: var(--primary-color);
+    text-decoration: underline;
+  }
+  
+  .markdown-content blockquote {
+    border-left: 4px solid var(--header-background);
+    padding-left: 1rem;
+    margin: 1.5rem 0;
+    color: #4a5568;
+    font-style: italic;
+  }
+
+  @media (max-width: 768px) {
+    .nav-header {
+      font-size: 1rem;
+      letter-spacing: 0.1em;
+    }
+
+    .content {
+      padding: 1rem;
+    }
+
+    .markdown-content {
+      padding: 0.5rem;
+    }
+  }
+</style>

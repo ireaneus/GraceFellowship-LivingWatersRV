@@ -1,0 +1,37 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="relative mt-16">
+  <div class="footer shadow-lg">
+    <div class="relative overflow-hidden">
+      <div class="absolute inset-0 bg-cyan-900/50 backdrop-blur-sm"></div>
+      <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 relative">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="backdrop-blur-sm bg-white/5 p-6 rounded-xl">
+            <h3 class="text-white text-lg font-semibold mb-4">Contact Us</h3>
+            <p class="text-cyan-100">123 Church Street</p>
+            <p class="text-cyan-100">City, State 12345</p>
+            <p class="text-cyan-100">Phone: (123) 456-7890</p>
+          </div>
+          <div class="backdrop-blur-sm bg-white/5 p-6 rounded-xl">
+            <h3 class="text-white text-lg font-semibold mb-4">Service Times</h3>
+            <p class="text-cyan-100">Sunday: 9:00 AM & 11:00 AM</p>
+            <p class="text-cyan-100">Wednesday: 7:00 PM</p>
+          </div>
+          <div class="backdrop-blur-sm bg-white/5 p-6 rounded-xl">
+            <h3 class="text-white text-lg font-semibold mb-4">Connect</h3>
+            <div class="flex space-x-4">
+              <a href="#" class="text-cyan-100 hover:text-white transition-colors">Facebook</a>
+              <a href="#" class="text-cyan-100 hover:text-white transition-colors">Instagram</a>
+              <a href="#" class="text-cyan-100 hover:text-white transition-colors">YouTube</a>
+            </div>
+          </div>
+        </div>
+        <div class="mt-8 border-t border-cyan-800/50 pt-8">
+          <p class="text-cyan-200 text-center">&copy; {currentYear} David Haines. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
