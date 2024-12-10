@@ -15,11 +15,11 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 ---
 
-<BaseLayout title={`${post.data.title} | Our Church Blog`}>
+<BaseLayout title={`${post.data.title} | My personal articles`}>
   <article class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
     <div class="max-w-3xl mx-auto">
       <header class="mb-8">
-        <h1 class="text-4xl font-bold text-gray-900 mb-4">{post.data.title}</h1>
+        <h1 class="text-3xl text-gray-800 mb-4">{post.data.title}</h1>
         <div class="text-gray-600">
           <p>By {post.data.author}</p>
           <p>{formatDate(post.data.date)}</p>
